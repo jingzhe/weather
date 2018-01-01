@@ -24,16 +24,14 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").authenticated()
-                .antMatchers(HttpMethod.GET, "/foo").hasAuthority("FOO_READ");
-                //.antMatchers(HttpMethod.POST, "/foo").hasAuthority("FOO_WRITE");
-                //you can implement it like this, but I show method invocation security on write
+                .antMatchers(HttpMethod.GET, "/forecast").hasAuthority("READ");
     }
 
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         log.info("Configuring ResourceServerSecurityConfigurer ");
-        resources.resourceId("foo").tokenStore(tokenStore);
+        resources.resourceId("forecast").tokenStore(tokenStore);
     }
 
     @Autowired
