@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { AuthenticationService } from './index';
 import { Forecast } from '../_models/index';
@@ -13,13 +13,11 @@ export class ForecastService {
         private authenticationService: AuthenticationService) {
     }
 
-    getForecast(): Observable<Forecast> {
+    getForecast(city): Observable<Response> {
         // add authorization header with jwt token
-        let headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
-        let options = new RequestOptions({ headers: headers });
-
-        // get users from api
-        return this.http.get('localhost:9090/foo', options)
-            .map((response: Response) => response.json());
+        const headers = new Headers({ 'Authorization': 'Bearer ' + this.authenticationService.token });
+        const options = new RequestOptions({ headers: headers });
+        const response = this.http.get('localhost:9090/forecast?city=' + city, options);
+        return response;
     }
 }

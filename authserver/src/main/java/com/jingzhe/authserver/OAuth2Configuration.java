@@ -22,9 +22,10 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("web_app")
-                .scopes("FOO")
+                .secret("web_secret")
+                .scopes("webclient")
                 .autoApprove(true)
-                .authorities("FOO_READ", "FOO_WRITE")
+                .authorities("READ", "WRITE")
                 .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code");
     }
 

@@ -9,16 +9,22 @@ import { ForecastService } from '../_services/index';
 })
 
 export class HomeComponent implements OnInit {
-    forecast: Forecast;
+    selectedCity: string;
 
     constructor(private forecastService: ForecastService) { }
 
-    ngOnInit() {
-        // get users from secure api end point
-        this.forecastService.getForecast()
-            .subscribe(forecast => {
-                this.forecast = forecast;
+    onSelect(city: string): void {
+        this.selectedCity = city;
+    }
+
+    onSendClick(city: string): void {
+        this.forecastService.getForecast(city)
+            .subscribe(response => {
+                console.log(response);
             });
     }
 
+    ngOnInit() {
+
+    }
 }

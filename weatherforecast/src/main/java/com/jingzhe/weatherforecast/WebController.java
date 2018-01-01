@@ -1,24 +1,22 @@
 package com.jingzhe.weatherforecast;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
 @RestController
-@RequestMapping("/foo")
 public class WebController {
+    
+    @Autowired
+    private ForecastService forecastService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String readFoo() {
-        return "read foo " + UUID.randomUUID().toString();
+    @RequestMapping(method = RequestMethod.GET, value = "/forecast")
+    public Forecast readForecast(@RequestParam("city") String city) {
+        Forecast forecast = forecastService.getForecast(city);
+        return forecast;
     }
 
-    @PreAuthorize("hasAuthority('FOO_WRITE')")
-    @RequestMapping(method = RequestMethod.POST)
-    public String writeFoo() {
-        return "write foo " + UUID.randomUUID().toString();
-    }
+
 }
