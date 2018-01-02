@@ -23,7 +23,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").authenticated()
+                ///@TODO postman and curl are fine for this line, but not in Angular
+                //.antMatchers("/**").authenticated(); 
                 .antMatchers(HttpMethod.GET, "/forecast").hasAuthority("READ");
     }
 
