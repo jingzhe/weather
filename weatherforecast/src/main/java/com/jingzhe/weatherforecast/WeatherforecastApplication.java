@@ -13,7 +13,7 @@ public class WeatherforecastApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WeatherforecastApplication.class, args);
 	}
-	
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {

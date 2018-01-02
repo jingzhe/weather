@@ -19,9 +19,13 @@ export class HomeComponent implements OnInit {
 
     onSendClick(city: string): void {
         this.forecastService.getForecast(city)
-            .subscribe(response => {
-                console.log(response);
-            });
+            .subscribe(
+                result => {
+                    console.log(result);
+                },
+                err => {
+                    console.log('Error- something is wrong!');
+                });
     }
 
     ngOnInit() {
