@@ -25,7 +25,7 @@ public class ForecastService {
             forecast.setCountry(weatherData.getJSONObject("location").getString("country"));
             
             JSONArray timeArray = weatherData.getJSONObject("forecast").getJSONArray("time");
-            for(int i = 0, size = timeArray.length(); i <  size; ++i) {
+            for(int i = 0, size = timeArray.length() > 20 ? 20 : timeArray.length(); i <  size; ++i) {
                 JSONObject time = timeArray.getJSONObject(i);
                 String date = time.getString("to");
                 int temperature = Math.round(BigDecimal.valueOf(time.getJSONObject("temperature").getDouble("value")).floatValue() - Constants.Kelvin2Celsius);

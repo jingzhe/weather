@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.forecast_item {
+	display: inline-block;
+	width: 3em;
+	margin: .2em;
+	text-align: center;
+	background-color: #BBD8DC !important;
+}
+
+.forecast_icon {
+	width: 80%;
+}

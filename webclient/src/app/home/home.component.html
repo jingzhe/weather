@@ -10,4 +10,22 @@
     </div>
     <br>
     <p><a [routerLink]="['/login']">Logout</a></p>
+    
+    <div *ngIf="hasResult">
+        <h3>{{forecast.city}} ({{forecast.country}}) weather forecast</h3>
+        <br>
+        
+        <table>
+        <tr>
+	        <td *ngFor="let item of forecast.items"> 
+	           <div class="forecast_item">
+	               <div>8.1</div>
+	               <div>12:00</div>
+	               <img class="forecast_icon" [src]="imgSrc">
+    	           <div>{{item.temperature}}</div>
+    	       </div>
+	        </td>
+        </tr>
+        </table>
+    </div>
 </div>
