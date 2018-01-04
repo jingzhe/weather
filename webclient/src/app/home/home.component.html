@@ -4,7 +4,7 @@
     <br>
     <div>
 	  	<label>Please input city name:
-	    	<input class="form-control" [(ngModel)]="selectedCity" placeholder="city name">
+	    	<input (keyup.enter)="onSendClick(selectedCity)" class="form-control" [(ngModel)]="selectedCity" placeholder="city name">
 	  	</label>
 	  	<button class="btn btn-primary" (click)="onSendClick(selectedCity)">Send</button>
     </div>
@@ -19,9 +19,9 @@
         <tr>
 	        <td *ngFor="let item of forecast.items"> 
 	           <div class="forecast_item">
-	               <div>8.1</div>
-	               <div>12:00</div>
-	               <img class="forecast_icon" [src]="imgSrc">
+	               <div>{{item.weekDay}}</div>
+	               <div>{{item.localTime}}</div>
+	               <img class="forecast_icon" [src]="imgfolder + item.iconName">
     	           <div>{{item.temperature}}</div>
     	       </div>
 	        </td>

@@ -1,4 +1,6 @@
 export class ForecastData {
-    time: string;
+    weekDay: string;
+    localTime: string;
     temperature: string;
+    iconName: string;
 }

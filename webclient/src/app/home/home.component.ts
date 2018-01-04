@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     selectedCity: string;
     forecast: Forecast = new Forecast();
     hasResult = false;
-    imgSrc = '../../../assets/img/sun.png';
+    imgfolder = '../../../assets/img/';
 
 
     constructor(private forecastService: ForecastService) { }
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
                     this.forecast.city = result['city'];
                     this.forecast.country = result['country'];
                     this.forecast.items = result['forecasts'];
+                    console.log(this.forecast);
                 },
                 err => {
                     console.log('Error- something is wrong!');
