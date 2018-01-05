@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -7,26 +7,27 @@ import 'rxjs/add/operator/map';
 export class AuthenticationService {
     public token: string;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         // set token if saved in session storage
         const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
 
     login(username: string, password: string): Observable<boolean> {
-    const headers = new Headers({
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json',
-            'Authorization': 'Basic ' + btoa('web_app:web_secret')
-        });
+        const headers = new HttpHeaders({
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json',
+                'Authorization': 'Basic ' + btoa('web_app:web_secret')
+            });
 
-    const options = new RequestOptions({ headers: headers });
-    const data = 'username=' + username + '&password=' + password + '&grant_type=password' +
-      '&client_id=web_app&client_secret=web_secret';
-        return this.http.post('http://localhost:9999/oauth/token', data, options)
-            .map((response: Response) => {
+        const data = 'username=' + username + '&password=' + password + '&grant_type=password' +
+            '&client_id=web_app&client_secret=web_secret';
+
+        return this.http.post('http://localhost:9999/oauth/token', data, { headers: headers })
+            .map((response: HttpResponse<any>) => {
+                console.log(response);
                 // login successful if there's a jwt token in the response
-                const token = response.json() && response.json().access_token;
+                const token = response['access_token'];
                 if (token) {
                     // set token property
                     this.token = token;

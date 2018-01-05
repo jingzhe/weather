@@ -46,7 +46,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("nordea")
                 .password("nordea123")
-                .authorities("READ")
+                .authorities("READ", "WRITE")
                 .and()
                 .withUser("admin")
                 .password("admin123")

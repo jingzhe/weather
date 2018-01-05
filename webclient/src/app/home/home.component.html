@@ -1,15 +1,14 @@
 ﻿<div>
     <h1>Weather Forecast</h1>
-    <p>You're logged in!</p>
+    <p>You're logged in! <a [routerLink]="['/login']">Logout</a></p>
     <br>
     <div>
 	  	<label>Please input city name:
-	    	<input (keyup.enter)="onSendClick(selectedCity)" class="form-control" [(ngModel)]="selectedCity" placeholder="city name">
+	    	<input (keyup.enter)="onSendClick(selectedCity)" class="form-control" [(ngModel)]="selectedCity" placeholder="City name">
 	  	</label>
 	  	<button class="btn btn-primary" (click)="onSendClick(selectedCity)">Send</button>
     </div>
     <br>
-    <p><a [routerLink]="['/login']">Logout</a></p>
     
     <div *ngIf="hasResult">
         <h3>{{forecast.city}} ({{forecast.country}}) weather forecast</h3>
@@ -27,5 +26,28 @@
 	        </td>
         </tr>
         </table>
+    </div>
+    
+    <div *ngIf="hasResult === false && sendButtonClicked === true" class="not-found">
+        {{forecast.city}} is not found.
+    </div>
+    
+    <br>
+    <div>
+    <h3>Your favorite cities</h3>
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Country</th>
+            <th>City</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tr *ngFor="let item of favorites">
+           <td>{{item.country}}</td>
+           <td><div class="badge" (click)="onSendClick(item.city)">{{item.city}}</div></td>
+           <td><button class="btn btn-primary" (click)="onRemoveClick(item.city)">Remove</button></td>
+        </tr>
+        </table>    
     </div>
 </div>

@@ -35,12 +35,12 @@ public class ForecastService {
             String sunSetDate = weatherData.getJSONObject("sun").getString("set");
             
             JSONArray timeJsonArray = weatherData.getJSONObject("forecast").getJSONArray("time");
-            for(int i = 0, size = timeJsonArray.length() > 20 ? 20 : timeJsonArray.length(); i <  size; ++i) {
+            for(int i = 0, size = timeJsonArray.length(); i <  size; ++i) {
                 JSONObject timeJson = timeJsonArray.getJSONObject(i);
-                forecast.addForecastData(createForecastData(timeJson, longitude, sunRiseDate, sunSetDate));
+                if (i < 12 || (i >= 12 && i % 4 == 0)) {
+                    forecast.addForecastData(createForecastData(timeJson, longitude, sunRiseDate, sunSetDate));
+                }
             }
-
-            
         }
         catch(Exception e) {
             e.printStackTrace();

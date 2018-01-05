@@ -11,3 +11,21 @@
 .forecast_icon {
 	width: 80%;
 }
+
+.badge {
+  font-size: 11pt;
+  color: white;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  background-color: #60AD8B;
+  line-height: 1em;
+  position: relative;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 4px 4px 4px;
+  cursor: pointer;
+}
+
+.not-found {
+	color: red;
+	font-size: 15pt;
+}
