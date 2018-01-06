@@ -1,4 +1,5 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -15,7 +16,8 @@ export class AuthenticationService {
         this.token = currentUser && currentUser.token;
     }
 
-    login(username: string, password: string): Observable<boolean> {
+    // return value: 0 - ok, 1 - bad credential, 2 - other error
+    login(username: string, password: string): Observable<number> {
         const headers = new HttpHeaders({
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json',
@@ -36,13 +38,18 @@ export class AuthenticationService {
                     // store username and jwt token in session storage to keep user logged in between page refreshes
                     sessionStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
 
-                    // return true to indicate successful login
-                    return true;
+                    // return 0 to indicate successful login
+                    return 0;
                 } else {
-                    // return false to indicate failed login
-                    return false;
+                    // return 1 to indicate failed login
+                    return 1;
                 }
-            }).catch((error: any) => Observable.of(false));
+            }).catch((errorResponse: HttpErrorResponse) => {
+                if (errorResponse.error.error === 'invalid_grant') {
+                    return Observable.of(1);
+                }
+                return Observable.of(2);
+            });
     }
 
     logout(): void {
