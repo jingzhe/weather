@@ -2,6 +2,8 @@
 import { HttpClient, HttpHeaders, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthenticationService {
@@ -24,6 +26,7 @@ export class AuthenticationService {
             '&client_id=web_app&client_secret=web_secret';
 
         return this.http.post('http://localhost:9999/oauth/token', data, { headers: headers })
+            .catch((error: any) => Observable.of(false))
             .map((response: HttpResponse<any>) => {
                 console.log(response);
                 // login successful if there's a jwt token in the response
