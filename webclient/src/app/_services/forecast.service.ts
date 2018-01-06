@@ -18,9 +18,6 @@ export class ForecastService {
             'Accept': 'application/json',
             'Authorization': 'Bearer ' + this.authenticationService.token});
 
-        console.log('token=');
-        console.log(this.authenticationService.token);
-
         return this.http.get('http://localhost:9090/forecast?city=' + city, {headers: headers});
     }
 }

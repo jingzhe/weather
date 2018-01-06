@@ -32,23 +32,22 @@ export class HomeComponent implements OnInit {
         this.forecastService.getForecast(city)
             .subscribe(
                 result => {
-                    console.log(result);
-                  this.sendButtonClicked = true;
-                    if (result['forecasts'].length === 0) {
-                        this.hasResult = false;
-                        this.forecast.city = result['city'];
-                    }
-                    else {
-                        this.hasResult = true;
-                        this.forecast.city = result['city'];
-                        this.forecast.country = result['country'];
-                        this.forecast.items = result['forecasts'];
-                        this.favoriteService.addFavorite(this.forecast.country, this.forecast.city)
-                            .subscribe(
-                                favoriteResult => {
-                                  this.favorites = favoriteResult as Favorite[];
-                                });
-                    }
+                    this.sendButtonClicked = true;
+                      if (result['forecasts'].length === 0) {
+                          this.hasResult = false;
+                          this.forecast.city = result['city'];
+                      }
+                      else {
+                          this.hasResult = true;
+                          this.forecast.city = result['city'];
+                          this.forecast.country = result['country'];
+                          this.forecast.items = result['forecasts'];
+                          this.favoriteService.addFavorite(this.forecast.country, this.forecast.city)
+                              .subscribe(
+                                  favoriteResult => {
+                                    this.favorites = favoriteResult as Favorite[];
+                                  });
+                      }
                 },
                 err => {
                     console.log('Error- something is wrong!');

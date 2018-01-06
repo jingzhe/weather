@@ -26,9 +26,7 @@ export class AuthenticationService {
             '&client_id=web_app&client_secret=web_secret';
 
         return this.http.post('http://localhost:9999/oauth/token', data, { headers: headers })
-            .catch((error: any) => Observable.of(false))
             .map((response: HttpResponse<any>) => {
-                console.log(response);
                 // login successful if there's a jwt token in the response
                 const token = response['access_token'];
                 if (token) {
@@ -44,7 +42,7 @@ export class AuthenticationService {
                     // return false to indicate failed login
                     return false;
                 }
-            });
+            }).catch((error: any) => Observable.of(false));
     }
 
     logout(): void {
