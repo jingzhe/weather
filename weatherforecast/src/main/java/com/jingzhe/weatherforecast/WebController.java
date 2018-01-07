@@ -18,6 +18,4 @@ public class WebController {
         Forecast forecast = forecastService.getForecast(city);
         return forecast;
     }
-
-
 }

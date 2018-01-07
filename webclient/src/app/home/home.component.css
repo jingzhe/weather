@@ -1,15 +1,15 @@
 @CHARSET "UTF-8";
 
 .forecast_item {
-	display: inline-block;
-	width: 3em;
-	margin: .2em;
-	text-align: center;
-	background-color: #BBD8DC !important;
+  display: inline-block;
+  width: 3em;
+  margin: .2em;
+  text-align: center;
+  background-color: #BBD8DC !important;
 }
 
 .forecast_icon {
-	width: 80%;
+  width: 80%;
 }
 
 .badge {
@@ -25,8 +25,8 @@
 }
 
 .not-found {
-	color: red;
-	font-size: 15pt;
+  color: red;
+  font-size: 15pt;
 }
 
 .suggestions{
@@ -59,6 +59,6 @@
 }
 
 .a_hover{
-	background-color: #f19191;
+  background-color: #f19191;
 }
 

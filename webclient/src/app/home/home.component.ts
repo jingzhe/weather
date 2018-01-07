@@ -38,6 +38,9 @@ export class HomeComponent implements OnInit {
 
     onSendClick(city: string): void {
         this.selectedCity = city;
+        if (this.selectedCity.length === 0) {
+          return;
+        }
         this.forecastService.getForecast(city)
             .subscribe(
                 result => {

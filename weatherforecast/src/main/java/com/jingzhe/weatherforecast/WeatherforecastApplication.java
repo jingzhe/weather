@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class WeatherforecastApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WeatherforecastApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(WeatherforecastApplication.class, args);
+    }
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
