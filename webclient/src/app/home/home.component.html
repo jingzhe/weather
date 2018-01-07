@@ -3,10 +3,22 @@
     <p>You're logged in! <a [routerLink]="['/login']">Logout</a></p>
     <br>
     <div>
-	  	<label>Please input city name:
-	    	<input (keyup.enter)="onSendClick(selectedCity)" class="form-control" [(ngModel)]="selectedCity" placeholder="City name">
-	  	</label>
+	  	<label>Please input city name:</label>
+        <div>
+            <div class="input-field col s12">
+                <input class="form-control" [(ngModel)]="selectedCity" (keyup)=filter($event) placeholder="City name">
+            </div>
+            <div class="suggestions" *ngIf="filteredList.length > 0">
+                <ul *ngFor="let item of filteredList; let idx = index" >
+                    <li [ngClass]="{'a_hover': idx == selectedIdx}">
+                        <a (click)="select(item)">{{item}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+	    <br>
 	  	<button class="btn btn-primary" (click)="onSendClick(selectedCity)">Send</button>
+	  	
     </div>
     <br>
     

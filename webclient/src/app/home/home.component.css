@@ -18,7 +18,6 @@
   padding: 0.5em 0.5em 0.5em 0.5em;
   background-color: #60AD8B;
   line-height: 1em;
-  position: relative;
   height: 1.8em;
   margin-right: .8em;
   border-radius: 4px 4px 4px 4px;
@@ -29,3 +28,37 @@
 	color: red;
 	font-size: 15pt;
 }
+
+.suggestions{
+    border:solid 1px #f1f1f1;
+    position:absolute;
+    width:600px;
+    background: white;
+}
+
+.suggestions ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+.suggestions ul li{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.suggestions ul li a{
+    padding:5px;
+    display: block;
+    text-decoration: none;
+    color:#7E7E7E;
+}
+
+.suggestions ul li a:hover{
+    background-color: #f1b1b1;
+}
+
+.a_hover{
+	background-color: #f19191;
+}
+

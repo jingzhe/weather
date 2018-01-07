@@ -40,4 +40,13 @@ export class FavoriteService {
             {headers: headers});
     }
 
+    getCitiesInFinland(): Observable<Object> {
+        // add authorization header with jwt token
+        const headers = new HttpHeaders({
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + this.authenticationService.token});
+
+        return this.http.get('http://localhost:9091/citiesInFinland', {headers: headers});
+    }
+
 }

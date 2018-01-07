@@ -19,6 +19,11 @@ public class WebController {
     public List<Favorite> getFavorites() {
         return this.favoriteService.getFavorites();
     }
+    
+    @GetMapping("/citiesInFinland")
+    public List<String> getCities() {
+        return this.favoriteService.getCitiesInFinland();
+    }
 
     @PreAuthorize("hasAuthority('WRITE')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
