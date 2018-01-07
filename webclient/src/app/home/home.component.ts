@@ -17,13 +17,15 @@ import { FavoriteService } from '../_services/index';
 
 export class HomeComponent implements OnInit {
     selectedCity: string;
+    favoriteFilter: string;
     forecast: Forecast = new Forecast();
     hasResult = false;
     sendButtonClicked = false;
     imgfolder = '../../../assets/img/';
     favorites: Favorite[] = [];
-    filteredList = [];
-    selectedIdx = -1;
+    filteredFavorites: Favorite[] = [];
+    filteredCityList = [];
+    selectedCityIdx = -1;
     citiesInFinland = [];
 
     constructor(private forecastService: ForecastService,
@@ -52,7 +54,9 @@ export class HomeComponent implements OnInit {
                           this.favoriteService.addFavorite(this.forecast.country, this.forecast.city)
                               .subscribe(
                                   favoriteResult => {
+                                    this.favoriteFilter = '';
                                     this.favorites = favoriteResult as Favorite[];
+                                    this.filteredFavorites = this.favorites;
                                   });
                       }
                 },
@@ -66,6 +70,8 @@ export class HomeComponent implements OnInit {
             .subscribe(
                 favoriteResult => {
                   this.favorites = favoriteResult as Favorite[];
+                  this.filteredFavorites = this.favorites;
+                  this.favoriteFilter = '';
                 });
     }
     ngOnInit() {
@@ -73,6 +79,9 @@ export class HomeComponent implements OnInit {
             .subscribe(
                 favoriteResult => {
                   this.favorites = favoriteResult as Favorite[];
+                  this.favorites = favoriteResult as Favorite[];
+                  this.filteredFavorites = this.favorites;
+                  this.favoriteFilter = '';
                 });
 
         this.favoriteService.getCitiesInFinland()
@@ -82,41 +91,49 @@ export class HomeComponent implements OnInit {
                 });
     }
 
-    filter(event: any) {
-        console.log(event);
+    filterCity(event: any) {
         if (this.selectedCity !== '') {
-            this.filteredList = this.citiesInFinland.filter(function (el) {
+            this.filteredCityList = this.citiesInFinland.filter(function (el) {
                 return el.toLowerCase().indexOf(this.selectedCity.toLowerCase()) > -1;
             }.bind(this));
-            if (event.key === 'ArrowDown' && this.selectedIdx < this.filteredList.length) {
-                this.selectedIdx++;
-            } else if (event.key === 'ArrowUp' && this.selectedIdx > 0) {
-                this.selectedIdx--;
+            if (event.key === 'ArrowDown' && this.selectedCityIdx < this.filteredCityList.length) {
+                this.selectedCityIdx++;
+            } else if (event.key === 'ArrowUp' && this.selectedCityIdx > 0) {
+                this.selectedCityIdx--;
             } else if (event.key === 'Enter') {
-                if (this.filteredList.length === 0 && this.selectedCity.length !== 0) {
+                if (this.filteredCityList.length === 0 && this.selectedCity.length !== 0) {
                     this.onSendClick(this.selectedCity);
-                } else if (this.selectedIdx !== -1){
-                    this.selectedCity = this.filteredList[this.selectedIdx];
+                } else if (this.selectedCityIdx !== -1){
+                    this.selectedCity = this.filteredCityList[this.selectedCityIdx];
                     this.onSendClick(this.selectedCity);
                 } else if (this.selectedCity.length !== 0){
                     this.onSendClick(this.selectedCity);
                 }
-                this.filteredList = [];
-                this.selectedIdx = -1;
+                this.filteredCityList = [];
+                this.selectedCityIdx = -1;
             }
         } else {
-            this.filteredList = [];
+            this.filteredCityList = [];
         }
     }
 
-    select(item) {
+    filterFavorite(event: any) {
+        if (this.favoriteFilter !== '') {
+            this.filteredFavorites = this.favorites.filter(function (el) {
+                return el.city.toLowerCase().indexOf(this.favoriteFilter.toLowerCase()) > -1;
+            }.bind(this));
+        } else {
+            this.filteredFavorites = this.favorites;
+        }
+    }
+
+    selectCity(item) {
         this.selectedCity = item;
-        this.filteredList = [];
-        this.selectedIdx = -1;
+        this.filteredCityList = [];
+        this.selectedCityIdx = -1;
     }
 
     handleClick(event) {
-        console.log(event);
         let clickedComponent = event.target;
         let inside = false;
         do {
@@ -126,8 +143,8 @@ export class HomeComponent implements OnInit {
             clickedComponent = clickedComponent.parentNode;
         } while (clickedComponent);
         if (!inside) {
-            this.filteredList = [];
+            this.filteredCityList = [];
         }
-        this.selectedIdx = -1;
+        this.selectedCityIdx = -1;
     }
 }

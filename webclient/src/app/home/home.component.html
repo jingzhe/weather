@@ -6,12 +6,12 @@
 	  	<label>Please input city name:</label>
         <div>
             <div class="input-field col s12">
-                <input class="form-control" [(ngModel)]="selectedCity" (keyup)=filter($event) placeholder="City name">
+                <input class="form-control" [(ngModel)]="selectedCity" (keyup)=filterCity($event) placeholder="City name">
             </div>
-            <div class="suggestions" *ngIf="filteredList.length > 0">
-                <ul *ngFor="let item of filteredList; let idx = index" >
-                    <li [ngClass]="{'a_hover': idx == selectedIdx}">
-                        <a (click)="select(item)">{{item}}</a>
+            <div class="suggestions" *ngIf="filteredCityList.length > 0">
+                <ul *ngFor="let item of filteredCityList; let idx = index" >
+                    <li [ngClass]="{'a_hover': idx == selectedCityIdx}">
+                        <a (click)="selectCity(item)">{{item}}</a>
                     </li>
                 </ul>
             </div>
@@ -47,6 +47,13 @@
     <br>
     <div>
     <h3>Your favorite cities</h3>
+        <br>
+        <div>
+            <div class="input-field col s12">
+                <input class="form-control" [(ngModel)]="favoriteFilter" (keyup)=filterFavorite($event) placeholder="Favorite filter">
+            </div>
+        </div>
+	     <br>
         <table class="table">
         <thead>
         <tr>
@@ -55,7 +62,7 @@
             <th>Remove</th>
         </tr>
         </thead>
-        <tr *ngFor="let item of favorites">
+        <tr *ngFor="let item of filteredFavorites">
            <td>{{item.country}}</td>
            <td><div class="badge" (click)="onSendClick(item.city)">{{item.city}}</div></td>
            <td><button class="btn btn-primary" (click)="onRemoveClick(item.city)">Remove</button></td>
