@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>favorite</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Favorite project for weather application</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -54,10 +54,18 @@
             <scope>test</scope>
         </dependency>
         
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-test -->
         <dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-		</dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
