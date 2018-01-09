@@ -19,12 +19,16 @@ Brief explanation:
 How to run
 
 I tested in Linuxmint 18 with chrome browser.
+my versions:
+node: 8.9.4
+npm: 5.6.0
+java: 1.8.0
 
 - Open 4 shell windows
 - Start autentication server: cd weather/authserver && mvn spring-boot:run
 - Start favorite service: cd weather/favorite && mvn spring-boot:run
 - Start weatherforecast service: cd weather/weatherforecast && mvn spring-boot:run
-- Start Webclient: cd weather/webclient && ng serve
+- Start Webclient: cd weather/webclient && sudo npm install -g @angular/cli (only for the first time) && npm install && ng serve
 - Open your chrome browser, go to http://localhost:4200 (username: nordea, password: nordea123)
 
 How to run unit test
