@@ -27,6 +27,7 @@ import { HomeComponent } from './home/index';
         AuthenticationService,
         ForecastService,
         FavoriteService,
+        HttpClientModule
     ],
     bootstrap: [AppComponent]
 })
