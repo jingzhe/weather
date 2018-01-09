@@ -1,6 +1,43 @@
-api.openweathermap.org/data/2.5/forecast?q=Oulu&mode=xml&appid=9658cdd72df92190bbe07cc5a495c3ff
 
+Weather forecast architecture
 
-curl -H "Origin: http://localhost:4200" -XPOST "http://web_app:web_secret@localhost:9999/oauth/token" -d "grant_type=password&username=nordea&password=nordea123"
+weather
+├── authserver: Authentication server, http://localhost:9999
+├── favorite: Favorite microservice, http://localhost:9091
+├── readme.md: this readme file
+├── screenshot.png: a screenshot for presentation
+├── weatherforecast: Weather forecast microservice, http://localhost:9090
+└── webclient: Angular webclient, http://localhost:4200
 
-curl -H "Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MTQ4NDAyNzQsInVzZXJfbmFtZSI6Im5vcmRlYSIsImF1dGhvcml0aWVzIjpbIlJFQUQiXSwianRpIjoiZmQ2NmY0NzAtYjYzMi00OTE4LWE0ODgtZTNmMWQ5NjQyODM1IiwiY2xpZW50X2lkIjoid2ViX2FwcCIsInNjb3BlIjpbIlRFU1QiXX0.LSBK3MLroD5V1ltA0fzdV1T7T-4EoyfLrYp0prmSl1zHDb0yCNyxKBT2UY4qAa2-WR5QuGPDa-ZMpYFzgs7-QEYTde6VrqS5K2yXRb8B03YpWY80fcV3ytlnqtidkFIiu2s9K8WjTZEx7RSIDb4DF41pfXoVPQnXQq5gV75orEnZ9GkoDJI0MKjhXILd1lJWRMoDvGeNCrXVJfeXc0ztAzIwNGTiMxZNYzMomhwYuw1ioWuNi96TIvRNAgJrQERBhvw56p1JPwXiCRqzefdQ6C6PfnIey4sN4ZC9xNgdqaYSVOjTF_2pEpv1R_r9YJrPv7eEJLY9BGKnAyp22t8c0Q" "localhost:9090/forecast?city=oulu"
+Brief explanation:
+
+- Authentication server: Using OAuth2 and JWT to authenticate all RESTful API calls to microservices, with fixed username and password.
+- Favorite microservice: Provide user's favorite cities, support read, add and remove functions
+- Weatherforecast microservices: Provide weather data for given city, I use free weather service from http://api.openweathermap.org, get 5 days and 3 hours weather data.
+- Webclient is made from Angular 5.
+
+How to run
+
+I tested in Linuxmint 18 with chrome browser.
+
+- Open 4 shell windows
+- Start autentication server: cd weather/authserver && mvn spring-boot:run
+- Start favorite service: cd weather/favorite && mvn spring-boot:run
+- Start weatherforecast service: cd weather/weatherforecast && mvn spring-boot:run
+- Start Webclient: cd weather/webclient && ng serve
+- Open your chrome browser, go to http://localhost:4200 (username: nordea, password: nordea123)
+
+How to run unit test
+
+- cd weather/favorite && mvn clean test
+- cd weather/weatherforecast && mvn clean test
+- cd weather/webclient && ng test
+
+To be improved
+
+- I calculated local time of searched city by UTC time and longitude, might not be accuate for big country with only 1 timezone, such as China.
+- Auto-complete is supported when search the city for weather data, currently only cities in Finland are supported for auto-complete because of performance issues.
+- I calculated the weather type by my own weather expertise, not all weather types are supported (only support cloudy, light_rain, light_snow, clear_night, night_cloud, rain, snow, sun, sun_cloud)
+- Unit test could be improved with more mocking code
+
+I attach a screenshot for presentation.
