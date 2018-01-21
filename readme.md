@@ -29,7 +29,7 @@ java: 1.8.0
 - Start favorite service: cd weather/favorite && mvn spring-boot:run
 - Start weatherforecast service: cd weather/weatherforecast && mvn spring-boot:run
 - Start Webclient: cd weather/webclient && sudo npm install -g @angular/cli (only for the first time) && npm install && ng serve
-- Open your chrome browser, go to http://localhost:4200 (username: nordea, password: nordea123)
+- Open your chrome browser, go to http://localhost:4200 (username: user, password: user123)
 
 How to run unit test
 
