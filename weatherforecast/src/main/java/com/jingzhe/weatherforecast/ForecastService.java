@@ -30,6 +30,7 @@ public class ForecastService {
             JSONObject weatherData = json.getJSONObject("weatherdata");
             //System.out.println(weatherData.toString());
             forecast.setCountry(weatherData.getJSONObject("location").getString("country"));
+            forecast.setCity(weatherData.getJSONObject("location").getString("name"));
             int longitude = (int) weatherData.getJSONObject("location").getJSONObject("location").getDouble("longitude");
             String sunRiseDate = weatherData.getJSONObject("sun").getString("rise");
             String sunSetDate = weatherData.getJSONObject("sun").getString("set");
